@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const dbConnect = require("./utils/dbConnect");
-const productRouter = require("./routes/v1/products.route");
+const userRouter = require("./routes/v1/randomUser.route");
+const allUserRoute = require("./routes/v1/allUser.route");
+const addNewUser = require("./routes/v1/addNewUser.route");
+const deleteUser = require("./routes/v1/deleteUser.route");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -13,18 +16,22 @@ app.use(express.json());
 dbConnect();
 
 // route create
-app.use("/api/v1/product", productRouter);
+app.use("/user/random", userRouter);
+app.use("/user/all", allUserRoute);
+app.use("/user/save", addNewUser);
+app.use("/user/delete", deleteUser);
 
-// database run
-
+// database run and check api working route
 app.get("/", (req, res) => {
   res.send("db connect haha");
 });
 
-// api not set
+// user input wrong api then error api working
 app.all("*", (req, res) => {
   res.send("route is not found");
 });
+
+// api port number show
 app.listen(port, () => {
   console.log(`db connect port ${port}`);
 });
