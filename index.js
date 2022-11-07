@@ -5,6 +5,7 @@ const userRouter = require("./routes/v1/randomUser.route");
 const allUserRoute = require("./routes/v1/allUser.route");
 const addNewUser = require("./routes/v1/addNewUser.route");
 const deleteUser = require("./routes/v1/deleteUser.route");
+const updateUser = require("./routes/v1/updateUser.route");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -20,6 +21,7 @@ app.use("/user/random", userRouter);
 app.use("/user/all", allUserRoute);
 app.use("/user/save", addNewUser);
 app.use("/user/delete", deleteUser);
+app.use("/user/update", updateUser);
 
 // database run and check api working route
 app.get("/", (req, res) => {

@@ -10,7 +10,8 @@ module.exports.getAllUser = (req, res) => {
 
 // users get all user data api sending response
 module.exports.getAllUsers = (req, res) => {
-  res.send(data);
+  const { limit, page } = req.query;
+  res.send(data.slice(0, limit));
 };
 
 // users post a new user data api sending response
@@ -25,4 +26,25 @@ module.exports.deleteUser = (req, res) => {
   const filter = { _id: id };
   const updateData = data.filter((d) => d.id !== Number(id));
   res.send(updateData);
+};
+
+// user id with user information update
+
+module.exports.updateAUser = (req, res) => {
+  let randomNumber = Math.random() * 10;
+  const convertRandomNumber = Math.round(randomNumber);
+  const randomData = data.filter((d) => d.id === convertRandomNumber);
+  const { name, gender, contact, address, photoUrl } = req.body;
+
+  updateDoc = {
+    id: convertRandomNumber,
+    name: name,
+    gender: gender,
+    contact: contact,
+    address: address,
+    photoUrl: photoUrl,
+  };
+  randomData[0] = updateDoc;
+  // console.log((randomData[0] = updateDoc));
+  res.send(randomData);
 };
